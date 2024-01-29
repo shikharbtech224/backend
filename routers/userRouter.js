@@ -29,12 +29,29 @@ router.get('/getall', (req, res) => {
 
 });
 
-router.get('/getbyid', (req, res) => {
-    res.send('getbyid response from user');    
+router.get('/getbyid/:id', (req, res) => {
+
+    Model.findById(req.params.id)
+    .then((result) => {
+        res.json(result);
+    })
+    .catch((err) => {
+        console.log(err);
+        res.json(err);
+    });
 });
 
-router.get('/update', (req, res) => {
-    res.send('update response from user');    
+router.put('/update/:id', (req, res) => {
+
+    Model.findByIdAndUpdate(req.params.id, req.body)
+    .then((result) => {
+        res.json(result);
+    })
+    .catch((err) => {
+        console.log(err);
+        res.json(err);
+    });
+
 });
 
 // : denotes url parameter
