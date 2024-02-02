@@ -64,7 +64,17 @@ router.delete('/delete/:id', (req, res) => {
         console.log(err);
         res.json(err);
     });
-    
+});
+
+router.post('/authenticate', (req, res) => {
+    Model.findOne(req.body)
+    .then((result) => {
+        if(result) res.json(result);
+        else res.status(401).json({ message: 'Invalid credentials' })
+    }).catch((err) => {
+        console.log(err);
+        res.json(err);
+    });
 });
 
 module.exports = router;
